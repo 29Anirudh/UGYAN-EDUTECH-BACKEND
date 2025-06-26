@@ -3,11 +3,11 @@ const router = express.Router();
 const { editProfile } = require('../controllers/userController');
 const auth = require('../middleware/authMiddleware');
 const User = require('../models/User'); // ✅ Import User model
-
 // PATCH /api/users/edit
 router.patch('/edit', auth, editProfile);
 
-// ✅ GET /api/users/me - Get current logged-in user info
+
+
 router.get('/me', auth, async (req, res) => {
   try {
     const user = await User.findById(req.userId).select('-password');
