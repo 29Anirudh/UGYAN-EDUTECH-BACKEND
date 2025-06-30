@@ -6,7 +6,7 @@ module.exports = (req, res, next) => {
   const token = authHeader.split(' ')[1]; // Remove "Bearer "
   try {
     const verified = jwt.verify(token, process.env.JWT_SECRET);
-    req.userId = verified.id; // ✅ just store the id
+    req.user = { userId: verified.userId }; // Set as req.user.userId
     next();
   } catch {
     res.status(400).json({ error: 'Invalid token' });

@@ -14,8 +14,12 @@ const userSchema = new Schema({
       courseId: { type: Schema.Types.ObjectId, ref: 'Course' },
       enrollId: String,
       paymentStatus: String
+      
     }
   ],
+  dob:{
+    type:String
+  },
   branch:{
     type: String
   },

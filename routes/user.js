@@ -4,13 +4,15 @@ const { editProfile } = require('../controllers/userController');
 const auth = require('../middleware/authMiddleware');
 const User = require('../models/User'); // ✅ Import User model
 // PATCH /api/users/edit
+
+
 router.patch('/edit', auth, editProfile);
 
 
 
 router.get('/me', auth, async (req, res) => {
   try {
-    const user = await User.findById(req.userId).select('-password');
+    const user = await User.findById(req.user.userId).select('-password');
     if (!user) return res.status(404).json({ message: 'User not found' });
     res.json(user);
   } catch (err) {

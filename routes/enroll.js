@@ -1,6 +1,9 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const { enroll } = require('../controllers/enrollController');
-const auth = require('../middleware/authMiddleware');
-router.post('/', auth, enroll);
+const { enrollStudent, getEnrolledStudents,getEnrolledStudentsByCourse } = require("../controllers/enrollController");
+
+router.post("/enroll", enrollStudent); 
+router.get("/enrolledstudents",getEnrolledStudents);
+router.get("/:courseId/students", getEnrolledStudentsByCourse);
+
 module.exports = router;

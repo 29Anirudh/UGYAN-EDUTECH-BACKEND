@@ -1,10 +1,31 @@
 const User = require('../models/User');
 exports.editProfile = async (req, res) => {
-  const { firstName, lastName } = req.body;
+  const {
+    firstName,
+    lastName,
+    dob,
+    qualification,
+    branch,
+    passOutYear,
+    collegeName,
+    mobileNumber,
+    profilePic
+  } = req.body;
   try {
-    const updated = await User.findByIdAndUpdate(req.user.userId, { firstName, lastName }, { new: true });
+    const updateFields = {};
+    if (firstName !== undefined) updateFields.firstName = firstName;
+    if (lastName !== undefined) updateFields.lastName = lastName;
+    if (dob !== undefined) updateFields.dob = dob;
+    if (qualification !== undefined) updateFields.qualification = qualification;
+    if (branch !== undefined) updateFields.branch = branch;
+    if (passOutYear !== undefined) updateFields.passOutYear = passOutYear;
+    if (collegeName !== undefined) updateFields.collegeName = collegeName;
+    if (mobileNumber !== undefined) updateFields.mobileNumber = mobileNumber;
+    if (profilePic !== undefined) updateFields.profilePic = profilePic;
+
+    const updated = await User.findByIdAndUpdate(req.user.userId, updateFields, { new: true });
     res.json(updated);
-  } catch {
+  } catch (err) {
     res.status(500).json({ error: 'Profile update failed' });
   }
 };
