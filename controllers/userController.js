@@ -30,14 +30,22 @@ exports.editProfile = async (req, res) => {
   }
 };
 
-const Course = require('../models/Course');
-exports.getAllCourses = async (req, res) => {
-  const courses = await Course.find();
-  res.json(courses);
-};
-
-exports.createCourse = async (req, res) => {
-  const { title, description, instructor, price } = req.body;
-  const course = await Course.create({ title, description, instructor, price });
-  res.status(201).json(course);
-};
+exports.getUsers=async (req,res)=>{
+  try{
+    const users= await User.find();
+    res.json(users);
+  }
+  catch(err){
+    res.status(500).json({error:err});
+  }
+  
+}
+exports.getAdmins=async(req,res)=>{
+  try{
+    const admins= await User.find({role:'Admin'});
+    res.status(200).json(admins);
+  }
+  catch(err){
+    res.status(500).json({success:false,error:err});
+  }
+}

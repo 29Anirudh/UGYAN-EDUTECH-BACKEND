@@ -1,14 +1,14 @@
 const express = require('express');
-const router = express.Router();
-const { editProfile } = require('../controllers/userController');
+const  router = express.Router();
+const { editProfile, getUsers, getAdmins } = require('../controllers/userController');
 const auth = require('../middleware/authMiddleware');
 const User = require('../models/User'); // ✅ Import User model
 // PATCH /api/users/edit
 
 
 router.patch('/edit', auth, editProfile);
-
-
+router.get('/',getUsers);
+router.get('/admins',getAdmins)
 
 router.get('/me', auth, async (req, res) => {
   try {
