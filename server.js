@@ -5,6 +5,7 @@ const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
 const courseRoutes = require('./routes/course');
 const enrollRoutes = require('./routes/enroll');
+const progressRoutes=require('./routes/progress')
 const cors = require('cors');
 
 dotenv.config();
@@ -16,5 +17,6 @@ app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/courses', courseRoutes);
 app.use('/api/enrollment', enrollRoutes);
+app.use('/api/progress',progressRoutes);
 
 app.listen(process.env.PORT || 5000, () => console.log('Server started'));

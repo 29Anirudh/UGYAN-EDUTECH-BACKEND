@@ -18,6 +18,11 @@ const enrollmentSchema = new mongoose.Schema({
   enrollmentId: {
     type: String,
     unique: true,
+  },
+  status:{
+    type:String,
+    enum:['Active','Pending'],
+    default:'Pending'
   }
 });
 
